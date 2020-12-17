@@ -25,7 +25,7 @@ public class Product {
         this.prijs = prijs;
     }
 
-    @ManyToMany //TODO: MappedBy?????
+    @ManyToMany(mappedBy = "producten", targetEntity = OVChipkaart.class)
     private List<OVChipkaart> ovChipkaarten = new ArrayList<>();
 
     public int getProduct_nummer() {
