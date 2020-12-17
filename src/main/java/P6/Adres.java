@@ -1,6 +1,7 @@
 package P6;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "adres")
@@ -14,6 +15,7 @@ public class Adres {
     private String huisnummer;
     private String straat;
     private String woonplaats;
+    private int reiziger_id;
 
     public Adres() {
     }
