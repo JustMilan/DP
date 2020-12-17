@@ -24,17 +24,16 @@ public class ProductDAOPsql implements ProductDAO {
             preparedStatement.setFloat(4, product.getPrijs());
             preparedStatement.execute();
 
-//            PreparedStatement p1 = conn.prepareStatement("INSERT INTO ov_chipkaart_product VALUES (?, ?, ?, ?)");
-//            System.out.println(product.getProductNummer());
-//            for (OVChipkaart ovChipkaart : product.getOvChipkaart()) {
-//                p1.setInt(1, ovChipkaart.getKaartNummer());
-//                p1.setInt(2, product.getProductNummer());
-//                p1.setString(3, "gekocht");
-//                p1.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
-//                p1.execute();
-//            } //FIXME: ERROR: duplicate key value violates unique constraint "ov_chipkaart_product_pkey" Detail: Key (kaart_nummer, product_nummer)=(99999, 123) already exists.
-//
-//            p1.execute();
+            PreparedStatement p1 = conn.prepareStatement("INSERT INTO ov_chipkaart_product VALUES (?, ?, ?, ?)");
+            System.out.println(product.getOvChipkaart());
+            for (OVChipkaart ovChipkaart : product.getOvChipkaart()) {
+                p1.setInt(1, ovChipkaart.getKaartNummer());
+                p1.setInt(2, product.getProductNummer());
+                p1.setString(3, "gekocht");
+                p1.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
+                p1.execute();
+            }
+
 
             return true;
 

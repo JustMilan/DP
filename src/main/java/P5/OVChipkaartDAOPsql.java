@@ -1,6 +1,9 @@
 package P5;
 
+import net.bytebuddy.asm.Advice;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,13 +60,18 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             preparedStatement.setInt(3, ovChipkaart.getKlasse());
             preparedStatement.setFloat(4, ovChipkaart.getSaldo());
             preparedStatement.setInt(5, ovChipkaart.getReizigerId());
-            preparedStatement.execute();
 
-//            for (Product product : ovChipkaart.getProduct()) { //FIXME: Heeft nog geen product
-//                pdao.save(product);
-//            }
+//            PreparedStatement p1 = conn.prepareStatement(" INSERT INTO ov_chipkaart_product VALUES (?, ?, ?, ?)");
+//            for (Product product : ovChipkaart.getProduct()) {
+//                System.out.println(ovChipkaart.getKaartNummer());
+//                p1.setInt(1, ovChipkaart.getKaartNummer());
+//                p1.setInt(2, product.getProductNummer());
+//                p1.setString(3, "TEST");
+//                p1.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
+//                p1.execute();
+//            } Ivm met verantwoordelijkheden niet toegevoegd.
 
-            return true;
+            return preparedStatement.execute();
         } catch (SQLException sqlException) {
             System.out.println("Save went wrong");
             System.out.println(sqlException.getLocalizedMessage());
@@ -82,9 +90,9 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             preparedStatement.setInt(5, ovChipkaart.getReizigerId());
             preparedStatement.execute();
 
-           for (Product product : pdao.findByOVChipkaart(ovChipkaart)) {
-               if (ovChipkaart.getProduct().contains(product)) pdao.update(product);
-           }
+            for (Product product : pdao.findByOVChipkaart(ovChipkaart)) {
+                if (ovChipkaart.getProduct().contains(product)) pdao.update(product);
+            }
 
             return true;
         } catch (SQLException sqlException) {

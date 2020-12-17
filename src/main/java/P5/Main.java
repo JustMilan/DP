@@ -36,15 +36,21 @@ public class Main {
 
         Reiziger reiziger = new Reiziger(9732, "M", "les", "Kernel", java.sql.Date.valueOf("2000-02-05"));
         OVChipkaart ovChipkaart = new OVChipkaart(99999, java.sql.Date.valueOf("2029-09-05"), 3, 112.99f, reiziger.getId());
+        OVChipkaart ovChipkaart1 = new OVChipkaart(99998, java.sql.Date.valueOf("2027-06-12"), 2, 20.56f, reiziger.getId());
         Product product = new Product(123, "test", "testproduct", 10.00f);
 
-        System.out.println("save");
+        System.out.println("save\n");
 
+        System.out.println("save reiziger");
         rdao.save(reiziger);
+        System.out.println("save ovchipkaart");
         odao.save(ovChipkaart);
+        odao.save(ovChipkaart1);
 
         product.getOvChipkaart().add(ovChipkaart);
+        product.getOvChipkaart().add(ovChipkaart1);
 
+        System.out.println("save product\n");
         pdao.save(product);
 
         System.out.println(pdao.findAll());
@@ -65,7 +71,6 @@ public class Main {
         System.out.println(pdao.findByOVChipkaart(ovChipkaart));
 
         System.out.println("---------------------");
-
 
 
         System.out.println("delete");
