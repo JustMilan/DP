@@ -78,13 +78,15 @@ ON CONFLICT DO NOTHING;
 -- bij de resultaten.
 -- https://stackoverflow.com/a/59074975
 -- https://stackoverflow.com/a/28085614
+-- https://dba.stackexchange.com/q/190815
 DROP VIEW IF EXISTS s9_3;
 CREATE OR REPLACE VIEW s9_3 AS -- [TEST]
-SELECT opmerkingen, mnr
-FROM historie
+SELECT h.opmerkingen, h1.mnr
+FROM historie h
+         JOIN (SELECT DISTINCT mnr, max(begindatum) begindatum FROM historie GROUP BY mnr) h1 on h1.mnr = h.mnr AND h1.begindatum = h.begindatum
 WHERE opmerkingen IS NOT NULL
   AND trim(opmerkingen) != '';
--- testantwoord is foutief, zelfs handmatig gecheckt.
+
 
 -- S9.4  Carrièrepad
 --
