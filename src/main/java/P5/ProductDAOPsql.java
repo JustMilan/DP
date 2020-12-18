@@ -62,7 +62,7 @@ public class ProductDAOPsql implements ProductDAO {
             PreparedStatement p2 = conn.prepareStatement("INSERT INTO ov_chipkaart_product VALUES (?, ?, ?, ?)");
             for (OVChipkaart ovChipkaart : product.getOvChipkaart()) {
                 p2.setInt(1, ovChipkaart.getKaartNummer());
-                p2.setInt(2, product.getProductNummer()); //TODO: Waarom in of buiten de for loop?
+                p2.setInt(2, product.getProductNummer());
                 p2.setString(3, "gekocht");
                 p2.setDate(4, Date.valueOf(LocalDate.now()));
                 p2.execute();

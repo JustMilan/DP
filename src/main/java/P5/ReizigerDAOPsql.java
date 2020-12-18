@@ -53,8 +53,6 @@ public class ReizigerDAOPsql implements ReizigerDAO {
 
             preparedStatement.execute();
 
-            //TODO: adao naar odao zodat je kan updaten als een ov geupdate is en verwijderen als de ov niet meer bestaat.
-
             adao.update(reiziger.getAdres());
 
             for (OVChipkaart ovChipkaart : reiziger.getOvChipkaarten()) {
